@@ -8,6 +8,7 @@ import { Toaster } from 'react-hot-toast'
 import UserSyncHandler from './components/UserSyncHandler'
 import { RedirectToSignIn, SignedIn, SignedOut } from '@clerk/clerk-react'
 import Result from './pages/Result'
+import BuyCredits from './pages/BuyCredits'
 
 // Wrapper component to avoid fragment warnings
 const ProtectedResult = () => (
@@ -29,6 +30,7 @@ function App() {
       <Toaster />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/pricing" element={<BuyCredits/>} />
         <Route path="/result" element={<ProtectedResult />} />
       </Routes>
       <Footer />

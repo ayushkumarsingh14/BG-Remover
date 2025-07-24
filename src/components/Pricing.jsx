@@ -1,7 +1,25 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { plans } from '../assets/assets'
+import { useAuth, useClerk } from '@clerk/clerk-react'
+import { placedOrder } from '../service/OrderService'
+import { AppContext } from '../context/AppContext'
+
+
 
 const Pricing = () => {
+    const {isSignedIn, getToken} = useAuth()
+    const {openSignIn} = useClerk()
+    const {loadUserCredits, backendUrl} = useContext(AppContext)
+
+    const handleOrder = (planId) => {
+        if (!isSignedIn(planId)) {
+           return openSignIn() 
+        }
+        placedOrder({planId, getToken, onSuccess: () => {
+            loadUserCredits
+        }, backendUrl});
+    }
+    
   return (
     <div className='py-10 md:px-20 lg:px20'>
         <div className='container px-4 mx-auto'>
@@ -43,7 +61,7 @@ const Pricing = () => {
                                     {plan.description}
                                 </li>
                             </ul>    
-                            <button className='w-full py-3 px-6 text-center text-white font-semibold rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-600 to bg-indigo-600 transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer'>
+                            <button className='w-full py-3 px-6 text-center text-white font-semibold rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-600 to bg-indigo-600 transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer' onClick={() => handleOrder(plan.id)}>
                                 Choose plan                                
                             </button>    
                         </div>

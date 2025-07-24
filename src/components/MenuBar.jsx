@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { assets } from '../assets/assets'
 import { X, Menu } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { SignedOut, SignedIn, useClerk, UserButton, useUser } from '@clerk/clerk-react'
 import { AppContext } from '../context/AppContext'
 
@@ -10,6 +10,7 @@ export const MenuBar = () => {
   const { openSignIn, openSignUp } = useClerk()
   const { user } = useUser()
   const{credits} = useContext(AppContext)
+  const navigate = useNavigate()
 
   const openRegister = () => {
     setMenuOpen(false);
@@ -43,7 +44,7 @@ export const MenuBar = () => {
         </SignedOut>
         <SignedIn>
           <div className='flex items-center gap-2 sm:gap-3'>
-            <button className='flex items-center gap-2 bg-blue-100 px-4 sm:px-5 py-1.5 sm:py-2.5 rounded-full hover:scale-105 transition-all cursor-pointer duration-500'>
+            <button onClick={() => navigate("/pricing")} className='flex items-center gap-2 bg-blue-100 px-4 sm:px-5 py-1.5 sm:py-2.5 rounded-full hover:scale-105 transition-all cursor-pointer duration-500'>
               <img src={assets.credits} alt="credits" height={24} width={24} />
               <p className='text-xs sm:text-sm font-medium text-gray-600'>
                 Credits: {credits}
@@ -77,7 +78,7 @@ export const MenuBar = () => {
           </SignedOut>
           <SignedIn>
             <div className='flex items-center gap-2 sm:gap-3'>
-              <button className='flex items-center gap-2 bg-blue-100 px-4 sm:px-5 py-1.5 sm:py-2.5 rounded-full hover:scale-105 transition-all cursor-pointer duration-500'>
+              <button onClick={() => navigate("/pricing")} className='flex items-center gap-2 bg-blue-100 px-4 sm:px-5 py-1.5 sm:py-2.5 rounded-full hover:scale-105 transition-all cursor-pointer duration-500'>
                 <img src={assets.credits} alt="credits" height={24} width={24} />
                 <p className='text-xs sm:text-sm font-medium text-gray-600'>
                   Credits: {credits}
