@@ -2,9 +2,9 @@ import React from 'react'
 import Header from '../components/Header'
 import BgRemovalSteps from '../components/BgRemovalSteps'
 import BgSlider from '../components/BgSlider'
-import Pricing from '../components/Pricing'
 import Testimonials from '../components/Testimonials'
 import TryNow from '../components/TryNow'
+import BuyCredits from './BuyCredits'
 
 export const Home = () => {
   return (
@@ -12,7 +12,8 @@ export const Home = () => {
         <Header/>
         <BgRemovalSteps/>
         <BgSlider/>
-        <Pricing/>
+        <BuyCredits/>
+        
         <Testimonials/>
         <TryNow/>
     </div>
